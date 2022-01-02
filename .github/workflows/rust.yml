@@ -29,7 +29,7 @@ jobs:
       - name: Build - Check Examples & Tests
         run: RUSTFLAGS="-D warnings" cargo check --verbose --all-features --tests --examples
 
-  cross_build:
+  cross-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -40,12 +40,12 @@ jobs:
           override: true
 
       - name: Install Cross & Start Docker
-      - run: |
+        run: |
           cargo install cross
           sudo systemctl start docker
 
       - name: Cross Build
-      - run: RUSTFLAGS="-D warnings" cross build --tests --examples
+        run: RUSTFLAGS="-D warnings" cross build --tests --examples
 
   clippy:
     runs-on: ubuntu-latest
