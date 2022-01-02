@@ -49,9 +49,7 @@ jobs:
           sudo systemctl start docker
 
       - name: Cross Build
-        env:
-          CARGO_BUILD_TARGET: aarch64-unknown-linux-gnu
-        run: cross build --tests --examples
+        run: cross build --tests --examples --target aarch64-unknown-linux-gnu
 
   clippy:
     runs-on: ubuntu-latest
