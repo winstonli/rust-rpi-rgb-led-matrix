@@ -2,9 +2,9 @@ name: Rust
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   CARGO_TERM_COLOR: always
@@ -14,53 +14,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions-rs/toolchain@v1
-      with:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
           toolchain: nightly
           override: true
 
-    - name: Build - All Features
-      run: RUSTFLAGS="-D warnings" cargo build --verbose --all-features
-    - name: Build - Default
-      run: RUSTFLAGS="-D warnings" cargo build --verbose --features="c-stubs"
-    - name: Build - No Default Features
-      run: RUSTFLAGS="-D warnings" cargo build --verbose --no-default-features --features="c-stubs"
-    - name: Build - Check Examples & Tests
-      run: RUSTFLAGS="-D warnings" cargo check --verbose --all-features --tests --examples
+      - name: Build - All Features
+        run: RUSTFLAGS="-D warnings" cargo build --verbose --all-features
+      - name: Build - Default
+        run: RUSTFLAGS="-D warnings" cargo build --verbose --features="c-stubs"
+      - name: Build - No Default Features
+        run: RUSTFLAGS="-D warnings" cargo build --verbose --no-default-features --features="c-stubs"
+      - name: Build - Check Examples & Tests
+        run: RUSTFLAGS="-D warnings" cargo check --verbose --all-features --tests --examples
 
-  cross-build:
-    runs-on: ubuntu-latest
+  # cross-build:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions-rs/toolchain@v1
-      with:
-          toolchain: nightly
-          override: true
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions-rs/toolchain@v1
+  #       with:
+  #         toolchain: nightly
+  #         override: true
 
-    - name: Install Cross & Start Docker
-    - run: |
-        cargo install cross
-        sudo systemctl start docker
+  #     - name: Install Cross & Start Docker
+  #     - run: |
+  #         cargo install cross
+  #         sudo systemctl start docker
 
-    - name: Cross Build
-    - run: RUSTFLAGS="-D warnings" cross build --tests --examples
+  #     - name: Cross Build
+  #     - run: RUSTFLAGS="-D warnings" cross build --tests --examples
 
   clippy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions-rs/toolchain@v1
-      with:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
           toolchain: nightly
           components: clippy
           override: true
-    - uses: actions-rs/clippy-check@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        args: --all-features
+      - uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features
 
   format:
     runs-on: ubuntu-latest
@@ -68,7 +68,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
-            toolchain: nightly
-            components: rustfmt
-            override: true
+          toolchain: nightly
+          components: rustfmt
+          override: true
       - run: rustfmt --check --edition 2018 ./*/src/* ./*/examples/* ./*/build.rs
