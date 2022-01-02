@@ -29,23 +29,23 @@ jobs:
       - name: Build - Check Examples & Tests
         run: RUSTFLAGS="-D warnings" cargo check --verbose --all-features --tests --examples
 
-  # cross-build:
-  #   runs-on: ubuntu-latest
+  cross_build:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: nightly
-  #         override: true
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
 
-  #     - name: Install Cross & Start Docker
-  #     - run: |
-  #         cargo install cross
-  #         sudo systemctl start docker
+      - name: Install Cross & Start Docker
+      - run: |
+          cargo install cross
+          sudo systemctl start docker
 
-  #     - name: Cross Build
-  #     - run: RUSTFLAGS="-D warnings" cross build --tests --examples
+      - name: Cross Build
+      - run: RUSTFLAGS="-D warnings" cross build --tests --examples
 
   clippy:
     runs-on: ubuntu-latest
