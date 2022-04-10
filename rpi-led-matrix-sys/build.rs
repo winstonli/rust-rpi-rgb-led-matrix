@@ -27,7 +27,21 @@ fn main() {
     if !(target.contains("arm") || target.contains("aarch")) || !target.contains("linux") {
         // eprintln!("rpi-led-matrix-sys detected you're likely not compiling for a raspberry pi");
         // std::process::exit(-1);
+
+        // This crate should do nothing when compiling using a non-rpi toolchain.
         return;
+    }
+
+    // Set toolchain overrides.
+    // CC, CXX and AR are for the C++ library's Makefile.
+    if let Ok(cc) = std::env::var("TOTEM_CC") {
+        std::env::set_var("CC", cc);
+    }
+    if let Ok(cxx) = std::env::var("TOTEM_CXX") {
+        std::env::set_var("CXX", cxx)
+    }
+    if let Ok(ar) = std::env::var("TOTEM_AR") {
+        std::env::set_var("AR", ar)
     }
 
     // 1. copy our git submodule over to build artifacts so things like `cargo clean` work properly
