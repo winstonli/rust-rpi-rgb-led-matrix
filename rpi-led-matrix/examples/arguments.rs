@@ -1,11 +1,13 @@
 /// Extremely simple use of arguments to create matrix options
 #[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
+#[allow(deprecated)]
 use clap::{crate_version, App};
 #[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 use rpi_led_matrix::args;
 
 #[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 fn main() {
+    #[allow(deprecated)]
     let app = args::add_matrix_args(
         App::new("Argument Example")
             .about("shows basic usage of matrix arguments")

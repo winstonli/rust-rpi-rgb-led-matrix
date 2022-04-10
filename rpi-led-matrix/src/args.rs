@@ -1,12 +1,14 @@
 //! Provides functions to add arguments to control various parameters of your
 //! RGB LED matrix.
 use crate::options::{LedMatrixOptions, LedRuntimeOptions};
+#[allow(deprecated)]
 use clap::{arg, App};
 
 /// Given a clap App, adds arguments specific to the matrix initialization and returns
 /// a new [`App`](clap::App).
 #[must_use]
 #[allow(clippy::cognitive_complexity)]
+#[allow(deprecated)]
 pub fn add_matrix_args(app: App<'static>) -> App<'static> {
     app
     .arg(
@@ -163,6 +165,7 @@ pub fn matrix_options_from_args(
 }
 
 #[cfg(test)]
+#[allow(deprecated)]
 mod tests {
     use super::*;
     use clap::App;
