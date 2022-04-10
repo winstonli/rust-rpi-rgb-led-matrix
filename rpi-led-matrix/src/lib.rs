@@ -36,6 +36,8 @@
 //! ## `stdcpp-static-link`
 //!
 //! Passthrough argument to [`rpi-led-matrix-sys`](rpi_led_matrix_sys). See their documentation for more info.
+#![cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
+
 extern crate libc;
 
 #[cfg(feature = "args")]

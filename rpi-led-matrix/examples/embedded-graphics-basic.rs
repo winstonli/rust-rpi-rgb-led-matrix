@@ -1,5 +1,7 @@
 /// Example showing some basic usage of the C++ library.
+#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 use clap::{arg, crate_version, App};
+#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 use embedded_graphics::{
     mono_font::{ascii::FONT_4X6, MonoTextStyle},
     pixelcolor::Rgb888,
@@ -7,10 +9,13 @@ use embedded_graphics::{
     primitives::{Circle, PrimitiveStyle, Rectangle, Triangle},
     text::Text,
 };
+#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 use rpi_led_matrix::{args, LedMatrix};
 
+#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 const DELAY: std::time::Duration = std::time::Duration::from_secs(5);
 
+#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 fn main() {
     let app = args::add_matrix_args(
         App::new("C++ Library Example")
@@ -80,4 +85,9 @@ fn main() {
         .unwrap();
 
     std::thread::sleep(DELAY);
+}
+
+#[cfg(not(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu")))]
+fn main() {
+    println!("Example only available on rpi.")
 }

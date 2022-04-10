@@ -19,6 +19,8 @@
 //! ```text
 //! RUSTFLAGS="-L /PATH/TO/LIBSTDC++/DIR/" cargo build --features="stdcpp-static-link"
 //! ```
+#![cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
+
 use libc::{c_char, c_int};
 
 #[cfg(feature = "c-stubs")]
