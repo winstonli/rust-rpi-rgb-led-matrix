@@ -1,14 +1,10 @@
 /// Example showing some basic usage of the C++ library.
-#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 #[allow(deprecated)]
 use clap::{arg, crate_version, App};
-#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 use rpi_led_matrix::{args, LedColor, LedMatrix};
 
-#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 const INTER_LINE_DELAY: std::time::Duration = std::time::Duration::from_millis(16 * 2);
 
-#[cfg(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu"))]
 fn main() {
     #[allow(deprecated)]
     let app = args::add_matrix_args(
@@ -67,9 +63,4 @@ fn main() {
             std::thread::sleep(INTER_LINE_DELAY);
         }
     }
-}
-
-#[cfg(not(all(target_arch = "aarch64", target_vendor = "unknown", target_os = "linux", target_env = "gnu")))]
-fn main() {
-    println!("Example only available on rpi.")
 }

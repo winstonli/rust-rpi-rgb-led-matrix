@@ -25,11 +25,8 @@ fn main() {
     // 0. To guess at if we're targetting the right platform, look for linux as the system & arm as the architecture
     let target = std::env::var("TARGET").unwrap();
     if !(target.contains("arm") || target.contains("aarch")) || !target.contains("linux") {
-        // eprintln!("rpi-led-matrix-sys detected you're likely not compiling for a raspberry pi");
-        // std::process::exit(-1);
-
-        // This crate should do nothing when compiling using a non-rpi toolchain.
-        return;
+        eprintln!("rpi-led-matrix-sys detected you're likely not compiling for a raspberry pi");
+        std::process::exit(-1);
     }
 
     // Set toolchain overrides.

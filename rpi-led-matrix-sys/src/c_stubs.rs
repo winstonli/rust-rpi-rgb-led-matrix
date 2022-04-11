@@ -120,3 +120,8 @@ extern "C" fn draw_line(
     _b: u8,
 ) {
 }
+
+#[no_mangle]
+extern "C" fn get_microsecond_counter() -> c_int {
+    0
+}
