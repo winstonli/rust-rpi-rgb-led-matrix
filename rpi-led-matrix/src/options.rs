@@ -290,8 +290,9 @@ impl LedRuntimeOptions {
     }
 
     /// If True, drop privileges from 'root' after initializing the hardware.
+    /// 0 means don't set and the default is 1, so we have to set it to -1 to be set.
     pub fn set_drop_privileges(&mut self, drop_privileges: bool) {
-        self.0.drop_privileges = if drop_privileges { 1 } else { 0 };
+        self.0.drop_privileges = if drop_privileges { 1 } else { -1 };
     }
 
     /// You almost definitely want this to be left as True. Use this if you know what you're doing.
